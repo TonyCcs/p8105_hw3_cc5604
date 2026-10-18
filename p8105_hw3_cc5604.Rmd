@@ -6,8 +6,8 @@ output: github_document
 ---
 
 # Problem 1
-## Default setup
 ```{r setup, include=FALSE}
+# Default setup
 library(tidyverse)
 library(p8105.datasets)
 
@@ -35,12 +35,7 @@ data("ny_noaa")
 
 ## EDA
 ```{r}
-ny_noaa
-
 dimension = dim(ny_noaa)
-rowcount = nrow(ny_noaa)
-colcount = ncol(ny_noaa)
-colnames(ny_noaa)
 stationcount = n_distinct(ny_noaa$id)
 daterange = range(ny_noaa$date)
 
@@ -48,6 +43,8 @@ ny_noaa |>
   summarize(across(everything(), \(x) mean(is.na(x)))) |>
   knitr::kable(digits = 3)
 ```
+
+The ny_noaa dataset has 2595176 rows and 7 columns. It includes the following variables: `r colnames(ny_noaa)`. The data is from `r stationcount` distinct stations with date in the range of `r daterange`. A considerable amount of data is missing. Specifically, 43.7% of tmax and tmin values are not available. In addition, some proportion of snowfall, snow depth and precipitation data are also missing.
 
 ## Data cleaning
 ```{r}
@@ -66,6 +63,8 @@ ny_noaa_df |>
   count(snow, sort = TRUE)
 ```
 
+The most commonly observed snowfall value is 0. This is potentially because that it does not snow on most days of the year. After 0, the most common values are NA, 25, 13, and 51 mm.
+
 ## Two-panel plot showing the average max temperature in January and in July in each station across years
 ```{r}
 ny_noaa_df |>
@@ -79,12 +78,16 @@ ny_noaa_df |>
   facet_grid(. ~ month)
 ```
 
+From the plot, the average max temperatures for January and July are around 0 and 27 degrees respectively. The values varies more in January than in July. There are two most obvious outliers, with one station observing about 14 degress in July and another observing about -13 degrees in January.
+
 ## Two-panel plot showing tmax vs tmin
 ```{r}
 ny_noaa_df |>
   ggplot(aes(x = tmin, y = tmax)) +
   geom_bin2d()
 ```
+
+According to the plot, tmax and tmin are positively related. The dense cluster in the middle suggests that tmax is about 10-15 degress higher than tmin in most of the days.
 
 ## Plot showing the distribution of snowfall values greater than 0 and less than 100 separately by year
 ```{r}
@@ -93,6 +96,8 @@ ny_noaa_df |>
   ggplot(aes(x = factor(year), y = snow)) +
   geom_violin()
 ```
+
+From the plot, the distribution of snowfall values greater than 0 and less than 100 demonstrate similar trend over the years.
 
 # Problem 2
 ## Data cleaning and merging
