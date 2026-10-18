@@ -129,7 +129,8 @@ acc_df =
     names_to = "minute",
     names_prefix = "min",
     values_to = "mims"
-  )
+  ) |>
+  mutate(minute = as.numeric(minute))
 
 nhanes_df =
   left_join(demo_df, acc_df, by = "seqn")
@@ -152,6 +153,8 @@ demo_df |>
   ggplot(aes(x = education, y = age, fill = sex)) +
   geom_boxplot()
 ```
+
+The numbers of men and women are relatively close for “Less than high school” and “More than high school” group. However, there are more men than women in the “High school equivalent” group.
 
 ## Creating a total activity variable for each participant
 ```{r}
@@ -187,6 +190,8 @@ total_df |>
   geom_smooth(se = FALSE)
 ```
 
+The total activity shows a downward trend across all education groups as age goes up, especially (most significantly) in the "Less than high school" group. In the "More than high school" and "High school equivalent" group, women show a trend of higher activity compared to men. In the “Less than high school” group, women are more active at younger ages, then men become slightly more active from about 45 to 65.
+
 ## Three-panel plot that shows the 24-hour activity time courses for "Less than high school" group
 ```{r}
 nhanes_df |>
@@ -213,6 +218,8 @@ nhanes_df |>
   geom_line(aes(group = seqn), alpha = .1) +
   geom_smooth(se = FALSE)
 ```
+
+The activities from all three groups display the trend of being the lowest in the night, increase in the morning, maintain high during the day, and gradually drops in the evening. The smooth trends suggest that women demonstrate slightly higher activity compared to men during the day, while men are relatively more active than women in the evening and at night.
 
 # Problem 3
 ## Importing and cleaning the datasets
