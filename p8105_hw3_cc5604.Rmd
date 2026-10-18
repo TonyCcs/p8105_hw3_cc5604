@@ -183,3 +183,30 @@ total_df |>
   geom_smooth(se = FALSE)
 ```
 
+## Three-panel plot that shows the 24-hour activity time courses for "Less than high school" group
+```{r}
+nhanes_df |>
+  filter(education == "Less than high school") |>
+  ggplot(aes(x = minute, y = mims, color = sex)) +
+  geom_line(aes(group = seqn), alpha = .1) +
+  geom_smooth(se = FALSE)
+```
+
+## Three-panel plot that shows the 24-hour activity time courses for "High school equivalent" group
+```{r}
+nhanes_df |>
+  filter(education == "High school equivalent") |>
+  ggplot(aes(x = minute, y = mims, color = sex)) +
+  geom_line(aes(group = seqn), alpha = .1) +
+  geom_smooth(se = FALSE)
+```
+
+## Three-panel plot that shows the 24-hour activity time courses for "More than high school" group
+```{r}
+nhanes_df |>
+  filter(education == "More than high school") |>
+  ggplot(aes(x = minute, y = mims, color = sex)) +
+  geom_line(aes(group = seqn), alpha = .1) +
+  geom_smooth(se = FALSE)
+```
+
