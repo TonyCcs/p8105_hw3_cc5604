@@ -245,3 +245,11 @@ bind_rows(jan_2020_df, july_2020_df, jan_2024_df, july_2024_df) |>
   knitr::kable()
 ```
 
+## Table showing the 5 most popular starting stations for July 2024
+```{r}
+july_2024_df |>
+  count(start_station_name) |>
+  arrange(desc(n)) |>
+  head(5) |>
+  knitr::kable()
+```
