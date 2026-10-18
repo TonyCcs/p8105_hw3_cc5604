@@ -96,3 +96,24 @@ ny_noaa_df |>
 ```
 
 # Problem 2
+```{r}
+demo_df = 
+  read_csv("data/nhanes_covar.csv", skip = 4) |>
+  janitor::clean_names()|>
+  filter(age >= 21) |>
+  drop_na() |>
+  mutate(
+    sex = case_match(
+      sex, 
+      1 ~ "male", 
+      2 ~ "female"
+      ),
+    education = case_match(
+      education,
+      1 ~ "Less than high school",
+      2 ~ "High school equivalent",
+      3 ~ "More than high school"
+    )
+  )
+```
+
