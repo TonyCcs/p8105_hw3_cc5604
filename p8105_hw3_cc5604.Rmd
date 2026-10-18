@@ -141,3 +141,11 @@ demo_df |>
   ) |>
   knitr::kable()
 ```
+
+## Age distributions for men and women in each education category
+```{r}
+demo_df |>
+  ggplot(aes(x = education, y = age, fill = sex)) +
+  geom_boxplot()
+```
+
