@@ -1,0 +1,17 @@
+---
+title: "p8105_hw2_cc5604"
+author: "Changshen Chen"
+date: 2026-10-18
+output: github_document
+---
+
+
+# Problem 1
+## Loading necessary packages
+```{r}
+library(tidyverse)
+library(p8105.datasets)
+data("ny_noaa")
+```
+
+
