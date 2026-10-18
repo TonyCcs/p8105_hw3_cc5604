@@ -50,4 +50,48 @@ ny_noaa |>
   knitr::kable(digits = 3)
 ```
 
-## 
+## Data cleaning
+```{r}
+ny_noaa_df =
+  ny_noaa |>
+  mutate(
+    year = lubridate::year(date),
+    month = lubridate::month(date),
+    day = lubridate::day(date),
+    prcp = prcp / 10,
+    tmax = as.numeric(tmax) / 10,
+    tmin = as.numeric(tmin) / 10
+  )
+
+ny_noaa_df |>
+  count(snow, sort = TRUE)
+```
+
+## Two-panel plot showing the average max temperature in January and in July in each station across years
+```{r}
+ny_noaa_df |>
+  filter(month %in% c(1, 7)) |>
+  mutate(month = month.name[month]) |>
+  group_by(id, year, month) |>
+  summarize(mean_tmax = mean(tmax, na.rm = TRUE)) |>
+  ggplot(aes(x = year, y = mean_tmax, group = id)) +
+  geom_point() +
+  geom_line() +
+  facet_grid(. ~ month)
+```
+
+## Two-panel plot showing tmax vs tmin
+```{r}
+ny_noaa_df |>
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_bin2d()
+```
+
+## Plot showing the distribution of snowfall values greater than 0 and less than 100 separately by year
+```{r}
+ny_noaa_df |>
+  filter(snow > 0, snow < 100) |>
+  ggplot(aes(x = factor(year), y = snow)) +
+  geom_violin()
+```
+
