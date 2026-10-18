@@ -253,3 +253,16 @@ july_2024_df |>
   head(5) |>
   knitr::kable()
 ```
+
+## Investigating the effects of day of the week, month, and year on median ride duration
+```{r}
+median_df =
+  bind_rows(jan_2020_df, july_2020_df, jan_2024_df, july_2024_df) |>
+  group_by(year, month, weekdays) |>
+  summarize(median_duration = median(duration)) |>
+  mutate(year = as.character(year))
+
+median_df |>
+  ggplot(aes(x = weekdays, y = median_duration, color = month, shape = year)) +
+  geom_point()
+```
