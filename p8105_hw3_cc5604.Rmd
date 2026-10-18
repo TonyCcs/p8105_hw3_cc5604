@@ -131,3 +131,13 @@ nhanes_df =
   left_join(demo_df, acc_df, by = "seqn")
 ```
 
+## Table for the number of men and women in each education category
+```{r}
+demo_df |>
+  count(education, sex) |>
+  pivot_wider(
+    names_from = sex,
+    values_from = n
+  ) |>
+  knitr::kable()
+```
