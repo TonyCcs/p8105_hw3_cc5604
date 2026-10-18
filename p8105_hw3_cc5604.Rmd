@@ -149,3 +149,11 @@ demo_df |>
   geom_boxplot()
 ```
 
+## Creating a total activity variable for each participant
+```{r}
+total_df =
+  nhanes_df |>
+  group_by(seqn, sex, age, education) |>
+  summarize(total_mims = sum(mims))
+```
+
