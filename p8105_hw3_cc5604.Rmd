@@ -245,6 +245,8 @@ july_2024_df =
   mutate(year = 2024, month = "July")
 ```
 
+The datasets have similar structures. They all include the following variables: `r colnames(july_2024_df)`. The dimension for each datasets are computed: `r dim(jan_2020_df)` for Jan 2020 dataset, `r dim(july_2020_df)` for July 2020 dataset, `r dim(jan_2024_df)` for Jan 2024 dataset, and `r dim(july_2024_df)` for July 2024 dataset.
+
 ## Total number of rides in each combination of year and month separating casual riders and Citi Bike members
 ```{r}
 bind_rows(jan_2020_df, july_2020_df, jan_2024_df, july_2024_df) |>
@@ -255,6 +257,8 @@ bind_rows(jan_2020_df, july_2020_df, jan_2024_df, july_2024_df) |>
   ) |>
   knitr::kable()
 ```
+
+Across the months and years covered by the datasets, Citi Bike members take more rides than casual riders. In the same year, more rides are taken during January than during July. Between the two years, more rides are than in 2024 than in 2020. 
 
 ## Table showing the 5 most popular starting stations for July 2024
 ```{r}
@@ -278,6 +282,8 @@ median_df |>
   geom_point()
 ```
 
+In the same year, the median ride duration is longer in July than in January. Between the two years, median rides were shorter in 2024 than in 2020. The plot suggest a general trend that ride duration is longer on weekends than on weekdays, except from January 2024.
+
 ## Impact of month, membership status, and bike type on the distribution of ride duration
 ```{r}
 bind_rows(jan_2024_df, july_2024_df) |>
@@ -286,3 +292,4 @@ bind_rows(jan_2024_df, july_2024_df) |>
   geom_boxplot()
 ```
 
+According to the plot. the ride durations are right-skewed in every group with most rides under about 25 minutes. Casual riders on classic bikes have the longest median rides. They also take longer rides than members for both bike types and in both months. Between the two months, median ride duration is slightly longer in July than in January for every group. In addition, casual riders ride electric bike for shorter duration than classic bike, while bike type makes little difference for Citi Bike members.
