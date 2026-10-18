@@ -156,4 +156,30 @@ total_df =
   group_by(seqn, sex, age, education) |>
   summarize(total_mims = sum(mims))
 ```
+## Comparing total activities for "Less than high school" group
+```{r}
+total_df |>
+  filter(education == "Less than high school") |>
+  ggplot(aes(x = age, y = total_mims, color = sex)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+```
+
+## Comparing total activities for "High school equivalent" group
+```{r}
+total_df |>
+  filter(education == "High school equivalent") |>
+  ggplot(aes(x = age, y = total_mims, color = sex)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+```
+
+## Comparing total activities for "More than high school" group
+```{r}
+total_df |>
+  filter(education == "More than high school") |>
+  ggplot(aes(x = age, y = total_mims, color = sex)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+```
 
