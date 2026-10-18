@@ -210,3 +210,27 @@ nhanes_df |>
   geom_smooth(se = FALSE)
 ```
 
+# Problem 3
+## Importing and cleaning the datasets
+```{r}
+jan_2020_df =
+  read_csv("data/citibike/Jan 2020 Citi.csv") |>
+  janitor::clean_names()|>
+  mutate(year = 2020, month = "January")
+
+july_2020_df =
+  read_csv("data/citibike/July 2020 Citi.csv") |>
+  janitor::clean_names()|>
+  mutate(year = 2020, month = "July")
+
+jan_2024_df =
+  read_csv("data/citibike/Jan 2024 Citi.csv") |>
+  janitor::clean_names()|>
+  mutate(year = 2024, month = "January")
+
+july_2024_df =
+  read_csv("data/citibike/July 2024 Citi.csv") |>
+  janitor::clean_names()|>
+  mutate(year = 2024, month = "July")
+```
+
