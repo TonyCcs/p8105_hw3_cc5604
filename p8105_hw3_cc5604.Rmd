@@ -96,6 +96,7 @@ ny_noaa_df |>
 ```
 
 # Problem 2
+## Data cleaning and merging
 ```{r}
 demo_df = 
   read_csv("data/nhanes_covar.csv", skip = 4) |>
@@ -115,5 +116,18 @@ demo_df =
       3 ~ "More than high school"
     )
   )
+
+acc_df =
+  read_csv("data/nhanes_accel.csv") |>
+  janitor::clean_names()|>
+  pivot_longer(
+    min1:min1440,
+    names_to = "minute",
+    names_prefix = "min",
+    values_to = "mims"
+  )
+
+nhanes_df =
+  left_join(demo_df, acc_df, by = "seqn")
 ```
 
