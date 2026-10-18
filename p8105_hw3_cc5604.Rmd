@@ -266,3 +266,12 @@ median_df |>
   ggplot(aes(x = weekdays, y = median_duration, color = month, shape = year)) +
   geom_point()
 ```
+
+## Impact of month, membership status, and bike type on the distribution of ride duration
+```{r}
+bind_rows(jan_2024_df, july_2024_df) |>
+  mutate(rider_bike = paste(member_casual, rideable_type)) |>
+  ggplot(aes(x = duration, y = rider_bike, fill = month)) +
+  geom_boxplot()
+```
+
